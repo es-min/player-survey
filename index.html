@@ -46,7 +46,7 @@
         }
 
         button {
-            background-color: #4CAF50;
+            background-color: #3B82F6; /* 버튼 색상을 요청한 색상으로 변경 */
             color: white;
             border: none;
             cursor: pointer;
@@ -54,7 +54,7 @@
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #2563EB; /* Hover 시 조금 더 어두운 색상으로 변경 */
         }
 
         .confirmation {
@@ -84,13 +84,13 @@
 
         <!-- 질문 2: 주관식 문항 -->
         <label for="detailedOpinion">의견을 자세히 남겨주세요.</label>
-        <textarea id="detailedOpinion" name="detailedOpinion" rows="10" maxlength="1000" required></textarea>
+        <textarea id="detailedOpinion" name="detailedOpinion" rows="8" maxlength="1000" required></textarea> <!-- 2줄 줄임 -->
         <div class="char-counter"><span id="charCount">0</span>/1000</div><br>
 
-        <button type="submit">제출</button>
+        <button type="submit">의견 보내기</button> <!-- 버튼 이름을 '의견 보내기'로 변경 -->
     </form>
     <div id="confirmationMessage" class="confirmation" style="display:none;">
-        제출해주셔서 감사합니다!
+        소중한 의견 감사합니다 <!-- 제출 완료 메시지를 '소중한 의견 감사합니다'로 변경 -->
     </div>
 
     <script>
