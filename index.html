@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Survey Form</title>
+    <title>설문조사</title>
 </head>
 <body>
-    <h1>Simple Survey Form</h1>
+    <h1>간단한 설문조사</h1>
     <form id="surveyForm">
-        <label for="option">Choose an option:</label><br>
-        <input type="radio" id="option1" name="option" value="Option 1" required>
-        <label for="option1">Option 1</label><br>
-        <input type="radio" id="option2" name="option" value="Option 2">
-        <label for="option2">Option 2</label><br>
-        <input type="radio" id="option3" name="option" value="Option 3">
-        <label for="option3">Option 3</label><br><br>
+        <!-- 질문 1: 필수 선택 문항 -->
+        <label for="opinionType">어떤 종류의 의견이신가요?</label><br>
+        <input type="radio" id="opinionType1" name="opinionType" value="재생/사용시 불편점" required>
+        <label for="opinionType1">재생/사용시 불편점</label><br>
+        <input type="radio" id="opinionType2" name="opinionType" value="새로운 기능 제안">
+        <label for="opinionType2">새로운 기능 제안</label><br><br>
 
-        <label for="textResponse">Your response:</label><br>
-        <textarea id="textResponse" name="textResponse" required></textarea><br><br>
+        <!-- 질문 2: 주관식 문항 -->
+        <label for="detailedOpinion">의견을 자세히 남겨주세요.</label><br>
+        <textarea id="detailedOpinion" name="detailedOpinion" required></textarea><br><br>
 
-        <button type="submit">Submit</button>
+        <button type="submit">의견 보내기</button>
     </form>
     <div id="confirmationMessage" style="display:none;">
-        <h2>Thank you for your submission!</h2>
+        <h2>Kollus Player에 대한 의견 감사합니다!</h2>
     </div>
 
     <script>
@@ -36,7 +36,7 @@
                 data.append(key, value);
             });
 
-            fetch('https://script.google.com/macros/s/AKfycbxaBdfwHC3TSpLceMdVP0lToqMeZPO8u5joVf_zySEHF7e-i47IKxI-p3zZ7YKZItYY/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbzyLEJQlK-_JMjf3frJf2UjjaaMLeJHxw62z2UmMOR_TbgZ1Od_I-GQATGD5-gZNDC-/exec', {
                 method: 'POST',
                 body: data
             }).then(response => {
