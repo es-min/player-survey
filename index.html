@@ -30,19 +30,19 @@
             event.preventDefault();
 
             const formData = new FormData(event.target);
-            const data = {};
+            const data = new URLSearchParams();
+
             formData.forEach((value, key) => {
-                data[key] = value;
+                data.append(key, value);
             });
 
-            fetch('https://script.google.com/macros/s/AKfycbyMJUORPHTLPtJTggpg-27eNWY2EwipMFvHCdZGbTj8A9tk_37ek4e7RB_H1C5iRLsB/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbxaBdfwHC3TSpLceMdVP0lToqMeZPO8u5joVf_zySEHF7e-i47IKxI-p3zZ7YKZItYY/exec', {
                 method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: new URLSearchParams(data)
-            }).then(() => {
+                body: data
+            }).then(response => {
+                return response.json();
+            }).then(jsonResponse => {
+                console.log(jsonResponse);
                 document.getElementById('surveyForm').style.display = 'none';
                 document.getElementById('confirmationMessage').style.display = 'block';
             });
