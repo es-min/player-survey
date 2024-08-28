@@ -3,29 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>설문조사</title>
+    <title>Kollus Player 의견 남기기</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input, textarea, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical; /* 사용자가 창 크기를 조절할 수 있도록 허용 */
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .confirmation {
+            text-align: center;
+            color: green;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .char-counter {
+            text-align: right;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
 </head>
 <body>
-    <h1>간단한 설문조사</h1>
+    <h1>Kollus Player 의견 남기기</h1>
     <form id="surveyForm">
-        <!-- 질문 1: 필수 선택 문항 -->
-        <label for="opinionType">어떤 종류의 의견이신가요?</label><br>
-        <input type="radio" id="opinionType1" name="opinionType" value="재생/사용시 불편점" required>
-        <label for="opinionType1">재생/사용시 불편점</label><br>
-        <input type="radio" id="opinionType2" name="opinionType" value="새로운 기능 제안">
-        <label for="opinionType2">새로운 기능 제안</label><br><br>
+        <!-- 질문 1: 드롭다운 메뉴로 변경 -->
+        <label for="opinionType">어떤 종류의 의견이신가요?</label>
+        <select id="opinionType" name="opinionType" required>
+            <option value="" disabled selected>선택해주세요</option>
+            <option value="재생/사용시 불편점">재생/사용시 불편점</option>
+            <option value="새로운 기능 제안">새로운 기능 제안</option>
+        </select>
 
         <!-- 질문 2: 주관식 문항 -->
-        <label for="detailedOpinion">의견을 자세히 남겨주세요.</label><br>
-        <textarea id="detailedOpinion" name="detailedOpinion" required></textarea><br><br>
+        <label for="detailedOpinion">의견을 자세히 남겨주세요.</label>
+        <textarea id="detailedOpinion" name="detailedOpinion" rows="10" maxlength="1000" required></textarea>
+        <div class="char-counter"><span id="charCount">0</span>/1000</div><br>
 
         <button type="submit">의견 보내기</button>
     </form>
-    <div id="confirmationMessage" style="display:none;">
-        <h2>Kollus Player에 대한 의견 감사합니다!</h2>
+    <div id="confirmationMessage" class="confirmation" style="display:none;">
+        의견 감사합니다!
     </div>
 
     <script>
+        document.getElementById('detailedOpinion').addEventListener('input', function(event) {
+            const currentLength = event.target.value.length;
+            document.getElementById('charCount').textContent = currentLength;
+        });
+
         document.getElementById('surveyForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -36,7 +101,7 @@
                 data.append(key, value);
             });
 
-            fetch('https://script.google.com/macros/s/AKfycbzyLEJQlK-_JMjf3frJf2UjjaaMLeJHxw62z2UmMOR_TbgZ1Od_I-GQATGD5-gZNDC-/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbxSSw-ydciZvr1a1ZISea2d9uVOEUcDD6kcNJcPdgW89K7qgdh96S8WkU6FUQuP2cwG/exec', {
                 method: 'POST',
                 body: data
             }).then(response => {
