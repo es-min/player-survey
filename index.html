@@ -87,10 +87,10 @@
         <textarea id="detailedOpinion" name="detailedOpinion" rows="10" maxlength="1000" required></textarea>
         <div class="char-counter"><span id="charCount">0</span>/1000</div><br>
 
-        <button type="submit">의견 남기기</button>
+        <button type="submit">제출</button>
     </form>
     <div id="confirmationMessage" class="confirmation" style="display:none;">
-        의견 감사합니다!
+        제출해주셔서 감사합니다!
     </div>
 
     <script>
@@ -109,15 +109,21 @@
                 data.append(key, value);
             });
 
-            fetch(''https://script.google.com/macros/s/AKfycbxSSw-ydciZvr1a1ZISea2d9uVOEUcDD6kcNJcPdgW89K7qgdh96S8WkU6FUQuP2cwG/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbxSSw-ydciZvr1a1ZISea2d9uVOEUcDD6kcNJcPdgW89K7qgdh96S8WkU6FUQuP2cwG/exec', {
                 method: 'POST',
                 body: data
             }).then(response => {
-                return response.json();
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Network response was not ok.');
+                }
             }).then(jsonResponse => {
                 console.log(jsonResponse);
                 document.getElementById('surveyForm').style.display = 'none';
                 document.getElementById('confirmationMessage').style.display = 'block';
+            }).catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
             });
         });
     </script>
